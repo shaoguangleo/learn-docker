@@ -38,3 +38,97 @@ Docker 是一个开源的应用容器引擎，让开发者可以打包他们的�
  - Docker在访问内存时，不需要虚拟物理地址的转换
  - Docker启动速度在秒级，优于KVM
  - Docker可以通过git的操作来获取、更新、分发等，方便极客
+
+
+# 镜像相关
+
+## 获取镜像
+
+```
+sudo docker pull name[:tag]
+```
+如果不跟tag，那么会下载最新版。
+
+例如：
+
+```
+sudo docker pull ubuntu:10.04
+```
+在该镜像中运行一个bash
+```
+sudo docker run -ti ubuntu /bin/bash
+```
+
+## 查看镜像信息
+
+```
+sudo docker images
+```
+
+结果如下图所示：
+
+![docker-image](docker-image.png)
+
+
+可以使用**inspect**获取更详细的镜像信息
+```
+sudo docker inspect <IMAGE ID>
+```
+
+出现下述JSON格式的信息：
+
+![docker-inspect](docker-inspect.png)
+
+
+## 搜索镜像
+
+```
+sudo docker search <name>
+```
+
+![docker-search](docker-search.png)
+
+
+## 删除镜像
+
+```
+sudo docker rm <contain-name>  # Remove one or more contrainer
+sudo docker rmi <image-name>   # Remove one or more images
+```
+
+## 创建镜像
+
+创建镜像有3种方法：
+- 基于已有镜像的容器创建
+  - `sudo docker commit -m describe_info -a author image-new-id image-new-name`
+- 基于本地模板导入
+- 基于Dockerfile创建
+
+## 保存为本地镜像
+
+```
+sudo docker save -o tar-file image-name
+```
+比如：
+
+```
+sudo docker save -o centos7-ipython.tar.gz centos-ipython
+```
+其中centos-ipython，是我把ipython的开发环境添加到了官方centos中。
+打包的文件叫official版本大了不少，为597MB。
+
+
+## 载入本地镜像
+
+```
+sudo docker load --input tar-file
+or
+sudo docker load < tar-file
+```
+
+## 上传镜像
+
+如果感觉自己制作的镜像质量比较高，用的人很多，可以考虑上次到Docker hub上。
+```
+sudo docker push image-name[:tag]
+```
