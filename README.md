@@ -1,6 +1,6 @@
 # learn-docker
 
-!(docker)[docker.png]
+![docker](docker.png)
 
 [TOC]
 
@@ -31,7 +31,7 @@ Docker 是一个开源的应用容器引擎，让开发者可以打包他们的�
 
 ## Docker与KVM的对比
 
-!(docker-vs-kvm)[docker-vs-kvm.png]
+![docker-vs-kvm](docker-vs-kvm.png)
 
  - Docker有比虚拟机更少的抽象层
  - Docker利用的是宿主机的内核，而不需要Guest OS
