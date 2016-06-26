@@ -132,3 +132,71 @@ sudo docker load < tar-file
 ```
 sudo docker push image-name[:tag]
 ```
+
+# 容器相关
+
+容器是镜像的一个运行实例，区别在于，它带有额外的可写文件层。
+
+## 创建容器
+
+可以使用docker create来创建一个容器，例如
+
+```
+sudo docker create -it ubuntu:lastest
+```
+
+![docker-create](docker-create.png)
+
+会返回一个CONTAINER ID，这个ID可以用于后面的启动及停止容器。
+
+## 启动容器
+
+```
+sudo docker start ID
+```
+![docker-start](docker-start.png)
+
+## 终止容器
+
+```
+sudo docker stop ID
+```
+
+![docker-stop](docker-stop.png)
+
+## 进入容器
+
+单纯地创建一个容器，我们是无法进行交互或者看到容器中的信息的，此时就可以使用`attach、exec或者nsenter`工具来进入容器进行操作。
+
+```
+sudo docker attach CONTAINER_NAME
+```
+
+![docker-attach](docker-attach.png)
+
+```
+sudo docker exec -it CONTAINER_ID COMMAND
+```
+
+![docker-exec](docker-exec.png)
+
+## 删除容器
+
+可以使用
+```
+sudo docker rm CONTAINER
+```
+来删除处于**终止状态**的容器，如果容器还在运行，可以加上*-f*参数来强制删除，但是可能会有残留信息。
+
+## 导入和导出容器
+
+```
+sudo docker export CONTAINER_ID > filename.tar.gz
+```
+![docker-export](docker-export.png)
+
+```
+sudo docker import filename.tar.gz repository:tag
+```
+![docker-import](docker-import.png)
+
